@@ -32,6 +32,7 @@ ovip<-ovip%>%
   filter(indiv!="2973B", indiv!="8832B")
 summary(ovip)
 
+#### tree ID info ####
 #import TREEs data set USE COLUMNS FOR BDT TREATMENT DATA
 trees <- read_csv("input/all_trees_list_6_29_2022.csv")
 cols(
@@ -49,6 +50,7 @@ trees$field<-as.factor(trees$field)
 trees$rep<-as.factor(trees$rep)
 summary(trees)
 
+#### tree size ####
 #USE "all years long_trees_102022" for tree size measurements as "size"
 size  <- read_csv("input/all_years_long_tree102022.csv")
 size <- filter(size,year == 2022)
@@ -64,6 +66,7 @@ size$ht<-as.numeric(size$ht)
 size$radAvg<-as.numeric(size$radAvg)
 summary(size)
 
+#### join ovip with size ####
 #merge with ovip and size 
 ovip22 = merge(x=ovip,y=size[,c(3,26:29)],by="indiv", all.x=TRUE)
 ovip22 = merge(x=ovip22,y=trees[1:15],by="indiv",all.x=TRUE)
@@ -92,3 +95,18 @@ T_ovip22<-T_ovip22%>%
 summary(T_ovip22)
 tabyl(T_ovip22, div, rep, sppAct)
 write.csv(T_ovip22, "output/T_ovip22.csv")
+
+#### join with canopy cover ####
+#2021 and 2023
+
+
+#### calc tree growth ####
+#years 2020-21, 21-22, 22-23 (most important)
+#don't drop trees if missing some data/some years
+
+#growth in RCD, height, canopy radius most important
+#also trunk volume and canopy volume?
+
+
+
+#### check for known tree # issues ####
